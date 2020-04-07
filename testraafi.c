@@ -150,9 +150,12 @@ int main () {
     node* list = (node*)malloc(sizeof(node));
     list = NULL;
     char input [1000];
+    int n =2;
     FILE* f;
     printf("Masukkan nama file txt : ");
     scanf("%s", &input);
+    printf("Masukkan nilai n untuk n-gram : ");
+    scanf("%d", &n);
     f=fopen(input, "r");
     char data [1000];
     //program
@@ -184,7 +187,6 @@ int main () {
     for (int i =0;i<lenArr;i++){
         value[i] = (string*)calloc(lenArr,sizeof(string));
     }
-    int n =2;
     makeKey(word,key,lenArr,n);
     makeValue(word,value,lenArr,n);
     for (int i=0;i<lenArr;i++){
