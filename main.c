@@ -46,12 +46,10 @@ int main ()
      }
     makeKey(word,key,lenArr,n);
     makeValue(word,value,lenArr,n);
-     for (int i=0;i<lenArr;i++){
-        for (int j=0;j<lenArr;j++){
-            if (strcmp(key[i][j].kata,"")!=0){
-                printf("%s ---> %s\n",key[i][j].kata,value[i][j].kata);
-            }
-        }
+ 
+    table* LUT[lenArr];
+    for (int i =0;i<lenArr;i++){
+        LUT[i] = (table*)calloc(lenArr,sizeof(table));
     }
     fclose(f);
     return 0;
