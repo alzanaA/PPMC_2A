@@ -1,0 +1,1 @@
+void output(int n, int m);
