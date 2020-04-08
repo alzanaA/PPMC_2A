@@ -14,5 +14,6 @@ typedef struct node {
 
 typedef struct table{
     char key [1000];
-    node *value;
+    node* value;
+    table* next;
 }table;
