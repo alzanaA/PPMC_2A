@@ -51,6 +51,9 @@ int main ()
     for (int i =0;i<lenArr;i++){
         LUT[i] = (table*)calloc(lenArr,sizeof(table));
     }
+ 
+    output(n,m,lut)
+     
     fclose(f);
     return 0;
 }
