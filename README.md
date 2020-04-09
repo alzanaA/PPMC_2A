@@ -17,3 +17,7 @@ typedef struct table{
     node* value;
     table* next;
 }table;
+
+struct Queue{
+    table *front, *rear;
+};
