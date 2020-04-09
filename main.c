@@ -47,10 +47,8 @@ int main ()
     makeKey(word,key,lenArr,n);
     makeValue(word,value,lenArr,n);
  
-    table* LUT[lenArr];
-    for (int i =0;i<lenArr;i++){
-        LUT[i] = (table*)calloc(lenArr,sizeof(table));
-    }
+    struct Queue* LUT= new_queue();
+    makeTable(LUT, key, value, lenArr);
  
     output(n,m,lut)
      
