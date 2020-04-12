@@ -1,22 +1,11 @@
 /*Sudah bisa append value ke key yg sama & geser key, tapi belum sempurna.
 Queue hasil tidak memiliki elemen dengan key kosong. */
 
-void append (node** head_ref, char kata_baru []) {
-    node* new_node = (node*)malloc(sizeof(node));
-    node* last = *head_ref;
-    strcpy(new_node->kata,kata_baru);
-    new_node->next = NULL;
-    if (*head_ref == NULL) {
-        *head_ref = new_node;
-        return;
-    } else {
-        while (last->next != NULL) {
-            last = last->next;
-        }
-        last->next = new_node;
-        return;
-    }
-};
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "lookupTable.h"
+#include "arraykeyvalue.h"
 
 void printList(struct node *node) 
 { 
