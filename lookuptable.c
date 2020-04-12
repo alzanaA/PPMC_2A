@@ -4,7 +4,7 @@ Queue hasil tidak memiliki elemen dengan key kosong. */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "lookupTable.h"
+#include "lookuptable.h"
 #include "parsing.h"
 
 void printList(struct node *node) 
