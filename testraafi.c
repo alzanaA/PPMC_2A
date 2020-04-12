@@ -1,7 +1,7 @@
 /* EL2208 Praktikum Pemecahan Masalah dengan C 2019/2020
 * MODUL 8 – TUGAS BESAR
 * Kelompok : 2
-* Hari dan Tanggal : Selasa, 7 April 2020
+* Hari dan Tanggal : Minggu, 12 April 2020
 * Asisten (NIM) : Hamdani Fadhli (13217058)
 * Nama File : testraafi.c
 * Deskripsi : Tester untuk membuat array key dan array value dari file txt
@@ -68,7 +68,7 @@ void moveArray (node* head_ref, string** array, int lenArr) {
     return;
 };
 
-void makeKey (string** word, string** key, int len, int n){
+void makeKey (string** word, string** key, int len, int n, int lenList){
     string* temp[len];
     for (int i =0;i<len;i++){
         temp[i] = (string*)calloc(len,sizeof(string));
@@ -81,9 +81,25 @@ void makeKey (string** word, string** key, int len, int n){
     char x[1000];
     char* y;
     char* z;
+    int side = 0;
+    int count1 = 0;
+    int count2 = 0;
     for (int i=0;i<n;i++){
-        int i1=0;
-        int j1=i;
+        if (count2<lenList){
+            if (count1>=len){
+            side++;
+            count1=0;
+            }
+            if (side>=len){
+                side = 0;
+            }
+        } else {
+            count2 = 0;
+            count1 = 0;
+            side = 0;
+        }
+        int i1 = side;
+        int j1=count2%len;
         int i2=0;
         int j2=0;
         for (int j=0;j<(len*len);j++){
@@ -113,14 +129,33 @@ void makeKey (string** word, string** key, int len, int n){
             }
             j1++;
         }
+        count1++;
+        count2++;
     }
     return;
 };
 
-void makeValue (string** word, string** value, int len, int n){
+void makeValue (string** word, string** value, int len, int n, int lenList){
     int i,i1,j1,i2,j2;
-    i1=0;
-    j1=n;
+    int count1 = 0;
+    int count2 = 0;
+    int side = 0;
+    for (int j=0;j<n;j++){
+        if (count2<lenList){
+            if (count1>=len-1){
+                side++;
+                count1=0;
+            }
+        } else {
+            count2=0;
+            count1=0;
+            side=0;
+        }
+        count2++;
+        count1++;
+    }
+    i1=side;
+    j1=count2%len;
     i2=0;
     j2=0;
     for (i=0;i<(len*len);i++){
@@ -150,12 +185,12 @@ int main () {
     node* list = (node*)malloc(sizeof(node));
     list = NULL;
     char input [1000];
-    int n =2;
+    int n;
     FILE* f;
     printf("Masukkan nama file txt : ");
     scanf("%s", &input);
-    printf("Masukkan nilai n untuk n-gram : ");
-    scanf("%d", &n);
+    printf("Masukkan jumlah n untuk n-gram : ");
+    scanf("%d",&n);
     f=fopen(input, "r");
     char data [1000];
     //program
@@ -187,8 +222,8 @@ int main () {
     for (int i =0;i<lenArr;i++){
         value[i] = (string*)calloc(lenArr,sizeof(string));
     }
-    makeKey(word,key,lenArr,n);
-    makeValue(word,value,lenArr,n);
+    makeKey(word,key,lenArr,n,lenList);
+    makeValue(word,value,lenArr,n,lenList);
     for (int i=0;i<lenArr;i++){
         for (int j=0;j<lenArr;j++){
             if (strcmp(key[i][j].kata,"")!=0){
@@ -196,6 +231,7 @@ int main () {
             }
         }
     }
+    printf("%d", lenList);
     fclose(f);
     return 0;
 }
