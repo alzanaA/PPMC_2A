@@ -45,19 +45,18 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
     int count=0;
     for (int i=0;i<len;i++){
         for (int j=0;j<len;j++){
-            //if(i==0 && j==0);
-            //    continue;
             for (int m=0;m<i+1;m++){
-                for (int n=0;n<j+1;n++){
-                    if (i==m && j==n)
-                        continue;
-                    else{
+                if(m<i){
+                    for (int n=0;n<len;n++){
+                        /*if (i==m && j==n)
+                            continue;
+                        else{*/
                         if (strcmp(key[i][j].kata,"")!=0){
                             if (strcmp(key[i][j].kata,key[m][n].kata)!=0)
                                 continue;
                             else{
                                 append(&(temp[m][n].value), value[i][j].kata);
-                                //printf("2");      //for testing    
+                                printf("2");
                                 if (j<len-1){
                                     for(int x=j; x<len-1; x++){
                                         strcpy(key[i][x].kata, key[i][x+1].kata);
@@ -80,17 +79,54 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
                                 }
                             }
                         }
+                    //}
+                    }
+                }
+                else{
+                    for (int n=0;n<j;n++){
+                        /*if (i==m && j==n)
+                            continue;
+                        else{*/
+                        if (strcmp(key[i][j].kata,"")!=0){
+                            if (strcmp(key[i][j].kata,key[m][n].kata)!=0)
+                                continue;
+                            else{
+                                append(&(temp[m][n].value), value[i][j].kata);
+                                printf("2");
+                                if (j<len-1){
+                                    for(int x=j; x<len-1; x++){
+                                        strcpy(key[i][x].kata, key[i][x+1].kata);
+                                        strcpy(value[i][x].kata, value[i][x+1].kata); 
+                                    }                           
+                                }
+                                else {
+                                    strcpy(key[i][j].kata, key[i+1][0].kata);
+                                    strcpy(value[i][j].kata, value[i+1][0].kata);
+                                }
+                                for(int x=i+1; x<len; x++){
+                                    for(int y=0; y<len-1; y++){
+                                        strcpy(key[x][y].kata, key[x][y+1].kata);
+                                        strcpy(value[x][y].kata, value[x][y+1].kata);
+                                    }
+                                    if (x<len-1){
+                                        strcpy(key[x][len-1].kata, key[x+1][0].kata);
+                                        strcpy(value[x][len-1].kata, value[x+1][0].kata);
+                                    }
+                                }
+                            }
+                        }
+                    //}
                     }
                 }
             }
             if (strcmp(key[i][j].kata,"")!=0){
-                strcpy(temp[i][j].key, key[i][j].kata);
-                append(&(temp[i][j].value), value[i][j].kata);
-                count=count+1;
+                    strcpy(temp[i][j].key, key[i][j].kata);
+                    append(&(temp[i][j].value), value[i][j].kata);
+                    count=count+1;
             }
-            //printf("a");      //for testing
+            //printf("a");
         }
-    }//printf("%d", count);     //for testing
+    }//printf("%d", count);
     return count;
 }
 
@@ -99,8 +135,6 @@ void makeTable(table** LUT, string** key, string **value, int len){
     for (int i=0;i<len;i++){
         temp[i] = (table*)calloc(len,sizeof(table));
     }
-    strcpy(temp[0][0].key, key[0][0].kata);
-    append(&(temp[0][0].value), value[0][0].kata);
     int count= removeDuplicate(temp, key, value, len);
     /*printf("%d", count);
     printf("\n");           for testing*/
