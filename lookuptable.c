@@ -1,6 +1,3 @@
-/*Sudah bisa append value ke key yg sama & geser key, tapi belum sempurna.
-Queue hasil tidak memiliki elemen dengan key kosong. */
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -48,20 +45,18 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
             for (int m=0;m<i+1;m++){
                 if(m<i){
                     for (int n=0;n<len;n++){
-                        /*if (i==m && j==n)
-                            continue;
-                        else{*/
                         if (strcmp(key[i][j].kata,"")!=0){
                             if (strcmp(key[i][j].kata,key[m][n].kata)!=0)
                                 continue;
                             else{
                                 append(&(temp[m][n].value), value[i][j].kata);
-                                printf("2");
                                 if (j<len-1){
                                     for(int x=j; x<len-1; x++){
                                         strcpy(key[i][x].kata, key[i][x+1].kata);
                                         strcpy(value[i][x].kata, value[i][x+1].kata); 
-                                    }                           
+                                    }
+                                    strcpy(key[i][len-1].kata, key[i+1][0].kata);
+                                    strcpy(value[i][len-1].kata, value[i+1][0].kata);                           
                                 }
                                 else {
                                     strcpy(key[i][j].kata, key[i+1][0].kata);
@@ -79,25 +74,22 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
                                 }
                             }
                         }
-                    //}
                     }
                 }
                 else{
                     for (int n=0;n<j;n++){
-                        /*if (i==m && j==n)
-                            continue;
-                        else{*/
                         if (strcmp(key[i][j].kata,"")!=0){
                             if (strcmp(key[i][j].kata,key[m][n].kata)!=0)
                                 continue;
                             else{
                                 append(&(temp[m][n].value), value[i][j].kata);
-                                printf("2");
                                 if (j<len-1){
                                     for(int x=j; x<len-1; x++){
                                         strcpy(key[i][x].kata, key[i][x+1].kata);
                                         strcpy(value[i][x].kata, value[i][x+1].kata); 
-                                    }                           
+                                    }   
+                                    strcpy(key[i][len-1].kata, key[i+1][0].kata);
+                                    strcpy(value[i][len-1].kata, value[i+1][0].kata);                        
                                 }
                                 else {
                                     strcpy(key[i][j].kata, key[i+1][0].kata);
@@ -115,7 +107,6 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
                                 }
                             }
                         }
-                    //}
                     }
                 }
             }
@@ -124,9 +115,9 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
                     append(&(temp[i][j].value), value[i][j].kata);
                     count=count+1;
             }
-            //printf("a");
+            printf("%d", count);
         }
-    }//printf("%d", count);
+    }
     return count;
 }
 
@@ -136,15 +127,12 @@ void makeTable(table** LUT, string** key, string **value, int len){
         temp[i] = (table*)calloc(len,sizeof(table));
     }
     int count= removeDuplicate(temp, key, value, len);
-    /*printf("%d", count);
-    printf("\n");           for testing*/
     for (int i=0;i<(count/len);i++){
         for (int j=0;j<len;j++){
             if(temp[i][j].key != "");
                 enqueue(LUT, temp[i][j].key, temp[i][j].value);
         }
     }
-    printf("%d", count%len);
     for(int i=0; i<(count%len); i++){
         if(temp[count/len][i].key != "");
             enqueue(LUT, temp[count/len][i].key, temp[count/len][i].value);
