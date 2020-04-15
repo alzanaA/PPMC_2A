@@ -13,6 +13,7 @@
 
 int main ()
  {
+    while(true){
     printf("******N-GRAM PROGRAM******");
     getchar();
     printf("Selamat datang pada N-GRAM PROGRAM!!\n");
@@ -25,12 +26,20 @@ int main ()
     node* list = (node*)malloc(sizeof(node));
     list = NULL;
     FILE* f;
-    printf("Masukkan file : ");
+    printf("Masukkan file (ketik quit untuk keluar): ");
     gets(file);
-    printf("Masukkan nilai n: ");
+    if(strcmp(file, "quit")==0){
+        printf("\nThanks for having us");
+        break;
+    } else {
+        while(true) {
+    printf("\n\nMasukkan nilai n untuk n gram (input negatif untuk berganti file/quit): ");
     scanf("%d", &n);
+    if(n<0){
+        break;
+    }
     printf("Masukkan jumlah kata yang ingin dicetak: ");
-    scanf("%d", &m); 
+    scanf("%d", &m);
     f=fopen(file, "r");
     char data [1000];
  
@@ -71,5 +80,8 @@ int main ()
     output(n,m,LUT);
      
     fclose(f);
+    }
+    }
+    }
     return 0;
 }
