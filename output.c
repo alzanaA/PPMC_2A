@@ -1,3 +1,12 @@
+/* EL2208 Praktikum Pemecahan Masalah dengan C 2019/2020
+* MODUL 8 – TUGAS BESAR
+* Kelompok : 2
+* Hari dan Tanggal : Rabu, 15 April 2020
+* Asisten (NIM) : Hamdani Fadhli (13217058)
+* Nama File : output.c
+* Deskripsi : Fungsi untuk output data dari LUT yang ada
+*/
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -7,6 +16,7 @@
 
 
 int search(struct table * LUT, char * p, int m)
+// mencari indeks key yang sesuai
 {
     // is found
     if(strcmp(p,LUT->key)==0){
@@ -19,6 +29,7 @@ int search(struct table * LUT, char * p, int m)
 }
 
 char* getKey(struct table * LUT, int index)
+// mengekstrak key dari lut berdasar indeks
 {
     if(index != 0){
         return getKey(LUT->next, index - 1);
@@ -28,21 +39,23 @@ char* getKey(struct table * LUT, int index)
 }
 
 struct node * getValueRand(node * value, node * current, int word_index)
+// membantu mengekstrak satu value acak dari list yang diberikan
 {
-    if(word_index == 0){
-        //printf("-{%d}-",word_index);
+    if(word_index == 0){    // kondisi ditemukan
+    //printf("-{%d}-",word_index);
         return current;
-    } else {
-        //printf("={%d}=",word_index);
-        if(current->next == NULL){
+    } else {                // belum ditemukan
+    //printf("={%d}=",word_index);
+        if(current->next == NULL){      // kembali ke depan list
             return getValueRand(value, value, word_index-1);
-        } else {
+        } else {                        // begeser list
             return getValueRand(value, current->next, word_index-1);
         }
     }
 }
 
 char* getValue(struct table * LUT, int index, int m)
+// mengekstrak value dari key yang ada
 {
     // printf("\n================================= tag 9 %d",index);
     int word_index;
@@ -52,21 +65,21 @@ char* getValue(struct table * LUT, int index, int m)
     } else {
     // printf("\n================================= tag 9b %d", LUT);
         node * buff_value = (node*)malloc(sizeof(struct node));
+        // ambil angka acak
         word_index = rand() % m;
-        //printf("{%d}",word_index);
-
+    //printf("{%d}",word_index);
     // printf("\n================================= tag 9ba %d %d %s", word_index, LUT->value, LUT->value->kata);
-
+        // cari angka acak
         buff_value = getValueRand(LUT->value, LUT->value, word_index);
-
     // printf("\n================================= tag 9bb %d %s", buff_value, buff_value->kata);
-
         return buff_value->kata;
     }
 }
 
 
 void output(int n, int m, struct Queue * database)
+// fungsi yang akan mencetak hasil n-gram, hanya fungsi ini yang perlu
+// dipanggil dari luar
 {
     table * LUT = database->front;
     int i;
@@ -90,18 +103,13 @@ void output(int n, int m, struct Queue * database)
     
     // printf("\n====================== tag 5 %d",word_index);
 
-    for(i = 0; i<m-2; i++){
+    for(i = 0; i<m-n; i++){
     // printf("\n====================== tag 6 %d", i);
         // cari key n
         word_index = search(LUT, buffer, m);
 
         // ambil value
-        if(word_index < m){
-            strcpy(value, getValue(LUT, word_index, m));
-        } else {
-            printf("I N V A L I D");
-            break;
-        }
+        strcpy(value, getValue(LUT, word_index, m));
 
     // printf("\n================================= tag 7 %d",word_index);
 
