@@ -129,7 +129,6 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
                     append(&(temp[i][j].value), value[i][j].kata);
                     count=count+1;
             }
-            printf("%d", count);
         }
     }
     return count;
