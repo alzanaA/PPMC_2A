@@ -1,19 +1,25 @@
+/* EL2208 Praktikum Pemecahan Masalah dengan C 2019/2020
+* MODUL 8 – TUGAS BESAR
+* Kelompok : 2
+* Hari dan Tanggal : Rabu, 15 April 2020
+* Asisten (NIM) : Hamdani Fadhli (13217058)
+* Nama File : lookuptable.c
+* Deskripsi : fungsi untuk membuat lookup table, merge key yang sama, dan menyatukan value untuk key yang sama
+*/
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "tipedata.h"
+#include "parsing.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "lookuptable.h"
 #include "parsing.h"
-
-void printList(struct node *node) 
-{ 
-while (node != NULL) 
-{ 
-	printf("%s ", node->kata); 
-	node = node->next; 
-} 
-printf("\n");
-} 
 
 table* new_node(char k [], node *v){
 	table* temp = (table*)malloc(sizeof(struct table)); 
@@ -96,7 +102,8 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
                             if (strcmp(key[i][j].kata,key[m][n].kata)!=0)
                                 continue;
                             else{
-                                append(&(temp[m][n].value), value[i][j].kata);
+                                if(isSame(temp[m][n].value, value[i][j].kata)==false)
+                                    append(&(temp[m][n].value), value[i][j].kata);
                                 if (j<len-1){
                                     for(int x=j; x<len-1; x++){
                                         strcpy(key[i][x].kata, key[i][x+1].kata);
@@ -126,7 +133,8 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
             }
             if (strcmp(key[i][j].kata,"")!=0){
                     strcpy(temp[i][j].key, key[i][j].kata);
-                    append(&(temp[i][j].value), value[i][j].kata);
+                    if(isSame(temp[i][j].value, value[i][j].kata)==false)
+                        append(&(temp[i][j].value), value[i][j].kata);
                     count=count+1;
             }
         }
@@ -134,7 +142,7 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
     return count;
 }
 
-void makeTable(table** LUT, string** key, string **value, int len){
+void makeTable(struct Queue* LUT, string** key, string **value, int len){
     table* temp[len];
     for (int i=0;i<len;i++){
         temp[i] = (table*)calloc(len,sizeof(table));
