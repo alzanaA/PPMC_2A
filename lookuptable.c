@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "lookuptable.h"
 #include "parsing.h"
 
@@ -38,6 +39,18 @@ void enqueue(struct Queue* q, char k [], node* v) {
 	q->rear = temp; 
 } 
 
+bool isSame(node* head_list, char k[]) 
+{ 
+    node* temp = head_list; 
+    while (temp != NULL) 
+    { 
+        if (strcmp(temp->kata, k)==0) 
+            return true; 
+        temp = temp->next; 
+    } 
+    return false; 
+} 
+
 int removeDuplicate(table** temp, string** key, string **value, int len){
     int count=0;
     for (int i=0;i<len;i++){
@@ -49,7 +62,8 @@ int removeDuplicate(table** temp, string** key, string **value, int len){
                             if (strcmp(key[i][j].kata,key[m][n].kata)!=0)
                                 continue;
                             else{
-                                append(&(temp[m][n].value), value[i][j].kata);
+				if(isSame(temp[m][n].value, value[i][j].kata)==false)
+                                	append(&(temp[m][n].value), value[i][j].kata);
                                 if (j<len-1){
                                     for(int x=j; x<len-1; x++){
                                         strcpy(key[i][x].kata, key[i][x+1].kata);
