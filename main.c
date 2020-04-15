@@ -3,8 +3,8 @@
 * Kelompok : 2
 * Hari dan Tanggal : Rabu, 15 April 2020
 * Asisten (NIM) : Hamdani Fadhli (13217058)
-* Nama File : output.c
-* Deskripsi : Fungsi utama
+* Nama File : main.c
+* Deskripsi : program utama yang akan dijalankan
 */
 
 #include <stdio.h>
@@ -22,7 +22,7 @@
 
 int main ()
 {
-    while(true) // looping selama belum di quit
+    while(true)
 	{
 		printf("********************  N-GRAM PROGRAM  ********************");
         printf("\n");
@@ -33,34 +33,38 @@ int main ()
         printf("\n");
 		getchar();
 		
-		char file [20];			//inisiasi
+		char file [20];
 		int n;
 		int m;
+		// linked list per kata
 		node* list = (node*)malloc(sizeof(node));
 		list = NULL;
 		FILE* f;
-		printf("Masukkan file (ketik quit untuk keluar): "); // Meminta input user untuk file txt
+		printf("Masukkan file (ketik quit untuk keluar): ");
+		// input file
 		gets(file);
-		
-		if(strcmp(file, "quit")==0){	// program akan keluar jika user menginput 'quit'
+		// terminate untuk input file
+		if(strcmp(file, "quit")==0){
 			printf("\nThanks for having us");
 			break;
 		} else {
-			while(true) //looping pada input n dan m
+			while(true) 
 			{
+				// input n
 				printf("\nMasukkan nilai n untuk n gram (input negatif untuk berganti file/quit): ");
-				scanf("%d", &n);	// meminta input user untuk jumlah n pada n-gram
+				scanf("%d", &n);
 				if(n<0){
-					break; // akan keluar dari loop (kembali ke input file ext) jika memasukkan n < 0
+					break;
 				}
 
-				printf("Masukkan jumlah kata yang ingin dicetak: "); 
-				scanf("%d", &m);	 // meminta input user untuk jumlah kata yang ingin ditampilkan pada output
+				// input m
+				printf("Masukkan jumlah kata yang ingin dicetak: ");
+				scanf("%d", &m);
 				f=fopen(file, "r");
 				char data [1000];
 			 
 				while(fgets(data,1000,f)!=NULL)
-				{						// parsing file
+				{
 					char* x =strtok(data," \t\n");
 					while(x!=NULL)
 					{
@@ -69,26 +73,32 @@ int main ()
 					}
 				}
 				
+				// menghitung jumlah kata
 				int lenList = countLen(list);
 				int lenArr = sqrt(lenList)+1;
+
+				// membuat array per kata
 				string* word[lenArr];
 				for (int i =0;i<lenArr;i++){
 					word[i] = (string*)calloc(lenArr,sizeof(string));
 				}
-				
 				for (int i=0;i<lenArr;i++){
 					for (int j=0;j<lenArr;j++){
 						strcpy(word[i][j].kata,"");
 					}
 				}
 				
-				moveArray(list,word,lenArr);	// memanggil fungsi movearray
+				// memindahkan kata dari linked list ke arrya
+				moveArray(list,word,lenArr);
 				free(list);
+
+				// membuat array key
 				string* key[lenArr];
 				for (int i =0;i<lenArr;i++){
 					key[i] = (string*)calloc(lenArr,sizeof(string));
 				}
-				
+
+				// membuat array value
 				string* value[lenArr];
 				for (int i =0;i<lenArr;i++){
 					value[i] = (string*)calloc(lenArr,sizeof(string));
@@ -97,17 +107,25 @@ int main ()
 					}
 				}
 				
-				makeKey(word,key,lenArr,n,lenList);	// memanggil fungsi makeKey
-				makeValue(word,value,lenArr,n,lenList);	// memanggil fungsi makeValue
-			 
+				// mengisi array key dan value
+				makeKey(word,key,lenArr,n,lenList);
+				makeValue(word,value,lenArr,n,lenList);
+
+				// menyempurnakan key dan value pada lookup table
 				struct Queue* LUT= new_queue();
-				makeTable(LUT, key, value, lenArr);	// memanggil fungsi makeTable (meletakkan key dan value pada table)
+				makeTable(LUT, key, value, lenArr);
 			
+			    // menampilkan output
                 printf("\n");
-				output(n,m,LUT);	// memanggil fungsi output
+				output(n,m,LUT);
                 printf("\n");
 				
 				fclose(f);
+
+				for (int i=0;i<lenArr;i++){
+					free(key[i]);
+					free(value[i]);
+				}
 			}
 		}
 	}

@@ -1,9 +1,9 @@
 /* EL2208 Praktikum Pemecahan Masalah dengan C 2019/2020
 * MODUL 8 – TUGAS BESAR
 * Kelompok : 2
-* Hari dan Tanggal : Selasa, 14 April 2020
+* Hari dan Tanggal : Rabu, 15 April 2020
 * Asisten (NIM) : Hamdani Fadhli (13217058)
-* Nama File : testraafi.c
+* Nama File : arraykeyvalue.c
 * Deskripsi : fungsi untuk membuat array key dan array value dari array per kata dengan metode n-gram
 */
 #include <stdio.h>
@@ -87,6 +87,9 @@ void makeKey (string** word, string** key, int len, int n, int lenList){
         }
         count1++;
         count2++;
+    }
+    for (int g=0;g<len;g++){
+        free(temp[g]);
     }
     return;
 };

@@ -12,6 +12,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "tipedata.h"
+#include "parsing.h"
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include "lookuptable.h"
 #include "parsing.h"
 
