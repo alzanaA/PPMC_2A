@@ -4,6 +4,12 @@
 
 int main ()
  {
+    printf("******N-GRAM PROGRAM******");
+    getchar();
+    printf("Selamat datang pada N-GRAM PROGRAM!!\n");
+    printf("Program ini akan memberikan string acak berdasarkan referensi sebuah textfile dengan menggunakan konsep n-gram\n");
+    printf("Tekan ENTER untuk memulai");
+    getchar();
     char file [20];
     int n;
     node* list = (node*)malloc(sizeof(node));
