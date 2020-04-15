@@ -4,6 +4,23 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+typedef struct node {
+    char kata [1000];
+    struct node* next;
+}node;
+
+typedef struct table{
+    char key [1000];
+    node* value;
+    table* next;
+}table;
+
+struct Queue{
+    table *front, *rear;
+};
+
+
 int search(struct table * LUT, char * p, int m)
 {
     // is found
@@ -53,8 +70,9 @@ node * getValueRand(node * value, node * current, int word_index){
     }
 }
 
-void output(int n, int m, struct table * LUT)
+void output(int n, int m, struct Queue * database)
 {
+    table * LUT = database->front;
     int i;
     srand(time(0));
     
@@ -73,9 +91,10 @@ void output(int n, int m, struct table * LUT)
     char* token;
     char* bufferNew;
     char* rest;
+
     for(i = 0; i<m; i++){
         // cari key n
-        word_index = search(LUT,buffer);
+        word_index = search(LUT, buffer, m);
 
         // ambil value
         if(word_index < m){
@@ -102,4 +121,3 @@ void output(int n, int m, struct table * LUT)
         strcpy(buffer,bufferNew);
     }
 }
-
