@@ -5,6 +5,10 @@
 * Asisten (NIM) : Hamdani Fadhli (13217058)
 * Nama File : output.c
 * Deskripsi : Fungsi untuk output data dari LUT yang ada
+* Untuk menggunakan program cukup panggil output(n pada n-gram, banyaknya kata, queue database)
+
+note : bagian bawah ada fungsi main untuk test, tapi perlu copy definisi struct dan
+setiap beberapa baris ada print dengan indentasi 1 tab untuk debugging
 */
 
 #include <stdio.h>
