@@ -12,13 +12,16 @@ int main ()
     getchar();
     char file [20];
     int n;
+    int m;
     node* list = (node*)malloc(sizeof(node));
     list = NULL;
     FILE* f;
     printf("Masukkan file : ");
     gets(file);
     printf("Masukkan nilai n: ");
-    scanf("%d", &n); 
+    scanf("%d", &n);
+    printf("Masukkan jumlah kata yang ingin dicetak: ");
+    scanf("%d", &m); 
     f=fopen(file, "r");
     char data [1000];
  
@@ -56,7 +59,7 @@ int main ()
     struct Queue* LUT= new_queue();
     makeTable(LUT, key, value, lenArr);
  
-    output(n,m,lut)
+    output(n,m,LUT);
      
     fclose(f);
     return 0;
