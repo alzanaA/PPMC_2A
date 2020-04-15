@@ -125,6 +125,7 @@ int main ()
 				for (int i=0;i<lenArr;i++){
 					free(key[i]);
 					free(value[i]);
+					free(word[i]);
 				}
 			}
 		}

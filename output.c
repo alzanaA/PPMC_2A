@@ -46,10 +46,8 @@ struct node * getValueRand(node * value, node * current, int word_index)
 // membantu mengekstrak satu value acak dari list yang diberikan
 {
     if(word_index == 0){    // kondisi ditemukan
-    //printf("-{%d}-",word_index);
         return current;
     } else {                // belum ditemukan
-    //printf("={%d}=",word_index);
         if(current->next == NULL){      // kembali ke depan list
             return getValueRand(value, value, word_index-1);
         } else {                        // begeser list
@@ -61,21 +59,14 @@ struct node * getValueRand(node * value, node * current, int word_index)
 char* getValue(struct table * LUT, int index, int m)
 // mengekstrak value dari key yang ada
 {
-    // printf("\n================================= tag 9 %d",index);
     int word_index;
     if(index != 0){
-    // printf("\n================================= tag 9a %d",index);
         return getValue(LUT->next, index - 1, m);
     } else {
-    // printf("\n================================= tag 9b %d", LUT);
         node * buff_value = (node*)malloc(sizeof(struct node));
-        // ambil angka acak
         word_index = rand() % m;
-    //printf("{%d}",word_index);
-    // printf("\n================================= tag 9ba %d %d %s", word_index, LUT->value, LUT->value->kata);
         // cari angka acak
         buff_value = getValueRand(LUT->value, LUT->value, word_index);
-    // printf("\n================================= tag 9bb %d %s", buff_value, buff_value->kata);
         return buff_value->kata;
     }
 }
@@ -104,18 +95,13 @@ void output(int n, int m, struct Queue * database)
     char* token;
     char bufferNew[1000];
     char* rest;
-    
-    // printf("\n====================== tag 5 %d",word_index);
 
     for(i = 0; i<m-n; i++){
-    // printf("\n====================== tag 6 %d", i);
         // cari key n
         word_index = search(LUT, buffer, m);
 
         // ambil value
         strcpy(value, getValue(LUT, word_index, m));
-
-    // printf("\n================================= tag 7 %d",word_index);
 
         // cetak n
         printf(" %s",value);
@@ -123,18 +109,14 @@ void output(int n, int m, struct Queue * database)
         // update buffer
         rest = buffer;
         strcpy(bufferNew,"\0");
-    
-    // printf("---%s---", buffer);
 
         token = strtok_r(rest," ",&rest);
         while(token = strtok_r(rest," ",&rest))
         {
-            //printf("---%s---",token);
             strcat(bufferNew,token);
             strcat(bufferNew," ");
         }
 
-    // printf("\n================================= tag 8 %d",word_index);
         strcat(bufferNew, value);
         strcpy(buffer,bufferNew);
     }
