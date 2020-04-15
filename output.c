@@ -6,23 +6,6 @@
 #include "tipedata.h"
 
 
-typedef struct node {
-    char kata [1000];
-    struct node* next;
-}node;
-
-typedef struct table{
-    char key [1000];
-    node* value;
-    struct table* next;
-} table;
-
-struct Queue{
-    struct table *front;
-    struct table *rear;
-};
-
-
 int search(struct table * LUT, char * p, int m)
 {
     // is found
