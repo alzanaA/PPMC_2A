@@ -158,4 +158,7 @@ void makeTable(struct Queue* LUT, string** key, string **value, int len){
         if(temp[count/len][i].key != "");
             enqueue(LUT, temp[count/len][i].key, temp[count/len][i].value);
     }
+    for (int i=0;i<len;i++){
+        free(temp[i]);
+    }
 }
