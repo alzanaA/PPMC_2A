@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <stdbool.h>
+
+#include "parsing.h"
+#include "arraykeyvalue.h"
+#include "tipedata.h"
+#include "output.h"
+#include "lookuptable.h"
 
 int main ()
  {
@@ -53,8 +62,8 @@ int main ()
      for (int i =0;i<lenArr;i++){
          value[i] = (string*)calloc(lenArr,sizeof(string));
      }
-    makeKey(word,key,lenArr,n);
-    makeValue(word,value,lenArr,n);
+    makeKey(word,key,lenArr,n,lenList);
+    makeValue(word,value,lenArr,n,lenList);
  
     struct Queue* LUT= new_queue();
     makeTable(LUT, key, value, lenArr);

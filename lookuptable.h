@@ -1,3 +1,7 @@
+#ifndef LOOKUPTABLE_H
+#define LOOKUPTABLE_H
+#include "tipedata.h"
+
 void printList(struct node *node);
 void printQueue(struct Queue *q);
 table* new_node(char k [], node *v);
@@ -6,3 +10,5 @@ void enqueue(struct Queue* q, char k [], node* v);
 bool isSame(node* head_list, char k[]);
 int removeDuplicate(table** temp, string** key, string **value, int len);
 void makeTable(struct Queue* LUT, string** key, string **value, int len);
+
+#endif
