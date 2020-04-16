@@ -1,14 +1,13 @@
 /* EL2208 Praktikum Pemecahan Masalah dengan C 2019/2020
 * MODUL 8 – TUGAS BESAR
 * Kelompok : 2
-* Hari dan Tanggal : Rabu, 15 April 2020
+* Hari dan Tanggal : Kamis, 16 April 2020
 * Asisten (NIM) : Hamdani Fadhli (13217058)
 * Nama File : output.c
 * Deskripsi : Fungsi untuk output data dari LUT yang ada
 * Untuk menggunakan program cukup panggil output(n pada n-gram, banyaknya kata, queue database)
 
-note : bagian bawah ada fungsi main untuk test, tapi perlu copy definisi struct dan
-setiap beberapa baris ada print dengan indentasi 1 tab untuk debugging
+note : bagian bawah ada fungsi main untuk test, tapi perlu copy definisi struct
 */
 
 #include <stdio.h>
@@ -19,16 +18,16 @@ setiap beberapa baris ada print dengan indentasi 1 tab untuk debugging
 #include "tipedata.h"
 
 
-int search(struct table * LUT, char * p, int m)
+int search(struct table * LUT, char * p)
 // mencari indeks key yang sesuai
 {
     // is found
     if(strcmp(p,LUT->key)==0){
         return 0;
     } else if((LUT==NULL)||(LUT->next==NULL)) {// is last
-        return m;
+        return 0;
     } else { // Next element
-        return 1 + search(LUT->next,p,m);
+        return 1 + search(LUT->next,p);
     }
 }
 
@@ -63,7 +62,7 @@ char* getValue(struct table * LUT, int index, int m)
     if(index != 0){
         return getValue(LUT->next, index - 1, m);
     } else {
-        node * buff_value = (node*)malloc(sizeof(struct node));
+        node * buff_value;
         word_index = rand() % m;
         // cari angka acak
         buff_value = getValueRand(LUT->value, LUT->value, word_index);
@@ -93,12 +92,12 @@ void output(int n, int m, struct Queue * database)
 
     // loop
     char* token;
-    char bufferNew[1000];
+    char* bufferNew = (char*)calloc(1000,sizeof(char));;
     char* rest;
 
     for(i = 0; i<m-n; i++){
         // cari key n
-        word_index = search(LUT, buffer, m);
+        word_index = search(LUT, buffer);
 
         // ambil value
         strcpy(value, getValue(LUT, word_index, m));
@@ -108,7 +107,9 @@ void output(int n, int m, struct Queue * database)
 
         // update buffer
         rest = buffer;
-        strcpy(bufferNew,"\0");
+
+        free(bufferNew);
+        bufferNew = (char*)calloc(1000,sizeof(char));
 
         token = strtok_r(rest," ",&rest);
         while(token = strtok_r(rest," ",&rest))
