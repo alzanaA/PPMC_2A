@@ -34,12 +34,6 @@ int main ()
 		getchar();
 		
 		char file [20];
-		int n;
-		int m;
-		// linked list per kata
-		node* list = (node*)malloc(sizeof(node));
-		list = NULL;
-		FILE* f;
 		printf("Masukkan file (ketik quit untuk keluar): ");
 		// input file
 		gets(file);
@@ -50,6 +44,12 @@ int main ()
 		} else {
 			while(true) 
 			{
+				int n;
+				int m;
+				// linked list per kata
+				node* list = (node*)malloc(sizeof(node));
+				list = NULL;
+				FILE* f;
 				// input n
 				printf("\nMasukkan nilai n untuk n gram (input negatif untuk berganti file/quit): ");
 				scanf("%d", &n);
@@ -102,7 +102,7 @@ int main ()
 				string* value[lenArr];
 				for (int i =0;i<lenArr;i++){
 					value[i] = (string*)calloc(lenArr,sizeof(string));
-					if(i % (200*n) == 0){
+					if(i % n == 0){
 						printf(" . ");
 					}
 				}
