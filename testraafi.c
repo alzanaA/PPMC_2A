@@ -1,7 +1,7 @@
 /* EL2208 Praktikum Pemecahan Masalah dengan C 2019/2020
 * MODUL 8 – TUGAS BESAR
 * Kelompok : 2
-* Hari dan Tanggal : Selasa, 14 April 2020
+* Hari dan Tanggal : Kamis, 16 April 2020
 * Asisten (NIM) : Hamdani Fadhli (13217058)
 * Nama File : testraafi.c
 * Deskripsi : Tester untuk membuat array key dan array value dari file txt
@@ -61,9 +61,30 @@ int main () {
             strcpy(word[i][j].kata,"");
         }
     }
+
     // memindahkan kata dari linked list ke array
     moveArray(list,word,lenArr);
+    
+    // print linked list
+    // printf("\nMencetak linked list per kata :\n");
+    // while (list!=NULL){
+    //     printf("%s\n",list->kata);
+    //     list=list->next;
+    // }
     free(list);
+
+    // menghitung jumlah kata
+    // printf("\nJumlah kata pada text : %d\n", lenList);
+    // print array per kata
+    // printf("\nMencetak array per kata :\n");
+    // for (int i=0;i<lenArr;i++){
+    //     for (int j=0;j<lenArr;j++){
+    //         if (strcmp(word[i][j].kata,"")!=0){
+    //             printf("%s\n",word[i][j].kata);
+    //         }
+    //     }
+    // }
+    // printf("\nJumlah kata pada text : %d\n", lenList);
 
     // membuat array key
     string* key[lenArr];
@@ -87,6 +108,7 @@ int main () {
             }
         }
     }
+    printf("\nJumlah kata pada text : %d\n", lenList);
     fclose(f);
     return 0;
 }
