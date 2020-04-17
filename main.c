@@ -61,7 +61,7 @@ int main ()
 				FILE* f;
 
 				// input m
-				printf("Masukkan jumlah kata yang ingin dicetak: ");
+				printf("Masukkan jumlah kata yang ingin dicetak (input negatif untuk berganti file/quit): ");
 				scanf("%d", &m);
 				if(m<0){
 					break;
