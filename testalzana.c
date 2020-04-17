@@ -13,10 +13,7 @@
 #include <stdbool.h>
 #include <math.h>
 
-/*#include "parsing.h"
-#include "arraykeyvalue.h"
-#include "lookuptable.h"
-#include "tipedata.h"*/
+int temp_count;		//variabel untuk menyimpan nilai variabel count
 
 typedef struct arrayofstring {
     char kata [1000];
@@ -436,22 +433,19 @@ int main () {
     // proses pengisian array key dan value dengan metode n-gram
     makeKey(word,key,lenArr,n,lenList);
     makeValue(word,value,lenArr,n,lenList);
-
-    // print key dan value
-    for (int i=0;i<lenArr;i++){
-        for (int j=0;j<lenArr;j++){
-            if (strcmp(key[i][j].kata,"")!=0){
-                printf("%s ---> %s\n",key[i][j].kata,value[i][j].kata);
-            }
-        }
-    }
-    fclose(f);
-
-    //membuat queue lookup table dan memanggil fungsi makeTable untuk merge key yang sama
+    // inisialisasi Queue dan pemindahan key dan value ke Queue LUT
     struct Queue* LUT= new_queue();
     makeTable(LUT, key, value, lenArr);
-    //test dengan print tiap node dalam queue
-    printf("\n\n");
+    for (int i=0;i<lenArr;i++){
+		free(key[i]);
+		free(value[i]);
+    }
+    printf("\n");
+    printf("\n");
+    //print key dan value pada queue LUT
     printQueue(LUT);
+    //print nilai variabel count
+    printf("Jumlah elemen pada LUT (count): %d", temp_count);
+    fclose(f);
     return 0;
 }
