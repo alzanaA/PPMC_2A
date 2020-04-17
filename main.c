@@ -38,20 +38,20 @@ int main ()
 		// input file
 		gets(file);
 
-		// input n
-		int n;
-		printf("\nMasukkan nilai n untuk n gram (input negatif untuk berganti file/quit): ");
-		scanf("%d", &n);
-		while (n<=1){
-			printf("n harus lebih dari 1 !\n");
-			printf("\nMasukkan nilai n untuk n gram (input negatif untuk berganti file/quit): ");
-		    scanf("%d", &n);
-		}
 		// terminate untuk input file
 		if(strcmp(file, "quit")==0){
 			printf("\nThanks for having us");
 			break;
 		} else {
+			// input n
+		    int n;
+		    printf("\nMasukkan nilai n untuk n gram (input harus lebih dari 1): ");
+		    scanf("%d", &n);
+		    while (n<=1){
+			    printf("n harus lebih dari 1 !\n");
+			    printf("\nMasukkan nilai n untuk n gram (input harus lebih dari 1): ");
+		        scanf("%d", &n);
+		    }
 			while(true) 
 			{
 				int m;
@@ -61,7 +61,7 @@ int main ()
 				FILE* f;
 
 				// input m
-				printf("Masukkan jumlah kata yang ingin dicetak: ");
+				printf("Masukkan jumlah kata yang ingin dicetak (input negatif untuk berganti file/quit): ");
 				scanf("%d", &m);
 				if(m<0){
 					break;
