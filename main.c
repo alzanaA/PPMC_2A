@@ -127,6 +127,7 @@ int main ()
 					free(value[i]);
 					free(word[i]);
 				}
+				free(LUT);
 			}
 		}
 	}
