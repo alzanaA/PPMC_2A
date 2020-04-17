@@ -42,7 +42,11 @@ int main ()
 		int n;
 		printf("\nMasukkan nilai n untuk n gram (input negatif untuk berganti file/quit): ");
 		scanf("%d", &n);
-		
+		while (n<=1){
+			printf("n harus lebih dari 1 !\n");
+			printf("\nMasukkan nilai n untuk n gram (input negatif untuk berganti file/quit): ");
+		    scanf("%d", &n);
+		}
 		// terminate untuk input file
 		if(strcmp(file, "quit")==0){
 			printf("\nThanks for having us");
