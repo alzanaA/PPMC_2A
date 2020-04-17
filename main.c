@@ -37,6 +37,12 @@ int main ()
 		printf("Masukkan file (ketik quit untuk keluar): ");
 		// input file
 		gets(file);
+
+		// input n
+		int n;
+		printf("\nMasukkan nilai n untuk n gram (input negatif untuk berganti file/quit): ");
+		scanf("%d", &n);
+		
 		// terminate untuk input file
 		if(strcmp(file, "quit")==0){
 			printf("\nThanks for having us");
@@ -44,22 +50,18 @@ int main ()
 		} else {
 			while(true) 
 			{
-				int n;
 				int m;
 				// linked list per kata
 				node* list = (node*)malloc(sizeof(node));
 				list = NULL;
 				FILE* f;
-				// input n
-				printf("\nMasukkan nilai n untuk n gram (input negatif untuk berganti file/quit): ");
-				scanf("%d", &n);
-				if(n<0){
-					break;
-				}
 
 				// input m
 				printf("Masukkan jumlah kata yang ingin dicetak: ");
 				scanf("%d", &m);
+				if(m<0){
+					break;
+				}
 				f=fopen(file, "r");
 				char data [1000];
 			 
