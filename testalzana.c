@@ -349,6 +349,7 @@ void makeTable(struct Queue* LUT, string** key, string **value, int len){
         temp[i] = (table*)calloc(len,sizeof(table));
     }
     int count= removeDuplicate(temp, key, value, len);
+    temp_count= count;
     for (int i=0;i<(count/len);i++){
         for (int j=0;j<len;j++){
             if(temp[i][j].key != "");
